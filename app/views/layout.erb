@@ -15,6 +15,12 @@
   </head>
   <body>
     <div class="wrapper">
+      <h1>Welcome To Your Lesson Planner!</h1>
+      <% if logged_in? %>
+        <p><a href="/">Home Page </a> or <a href="/logout">Log Out</a></p>
+      <% else %>
+        <p><a href="/signup">Sign Up</a> or <a href="/login">Log In</a></p>
+      <% end%>
 
         <%= yield %>
 
