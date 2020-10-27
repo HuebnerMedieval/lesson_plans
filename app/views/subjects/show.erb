@@ -1,0 +1,6 @@
+<h1><%= @subject.name %></h1>
+    <% @subject.lessons.each do |lesson|%>
+        <h2><%= lesson.title %> by <%= lesson.teacher.name %></h2>
+            <p><%= lesson.learning_obj %></p>
+            <a href="/lessons/<%= lesson.id %>">View Lesson</a>
+    <% end%>

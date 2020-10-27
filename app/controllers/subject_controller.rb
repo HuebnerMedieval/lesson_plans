@@ -1,6 +1,12 @@
 class SubjectController < ApplicationController
     get "/subjects" do
         if logged_in?
+            @subjects = []
+            Subject.all.each do |subject|
+                if !subject.lessons.empty?
+                    @subjects << subject
+                end
+            end
             erb :"subjects/subjects"
         else
             redirect "/"
