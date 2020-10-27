@@ -1,3 +1,5 @@
+require 'pry'
+
 class LessonController < ApplicationController
     get "/lessons/new" do
         if logged_in?
@@ -8,7 +10,25 @@ class LessonController < ApplicationController
     end
 
     post "/lessons" do
-        #instantiates a new lesson. Need to write the code
+        #checking to see whether params works instead of array
+        binding.pry
+        arr = []
+        title = params[:title]
+        arr << title
+        learning_obj = params[:learning_obj]
+        arr << learning_obj
+        length = params[:length]
+        arr << length
+        summary = params[:summary]
+        arr << summary
+        assessment = parrams[:assessment]
+        arr << assessment
+        if arr.include?("")
+            redirect "/lessons/new"
+        else
+            lesson = current_user.lessons.create(title: title, learning_obj: learning_obj, length: length, summary: summary, assessment: assessment)
+            redirect "lessons/#{lesson.id}"
+        end
     end
 
     get "/lessons" do
@@ -20,9 +40,9 @@ class LessonController < ApplicationController
         end
     end
 
-    get "/lessons/:slug" do
+    get "/lessons/:id" do
         if logged_in?
-            @lesson = Lesson.find_by_slug(params[:slug])
+            @lesson = Lesson.find_by(id: params[:id])
             if @lesson
                 erb :"lessons/show_lesson"
             else
@@ -33,14 +53,14 @@ class LessonController < ApplicationController
         end
     end
 
-    get "lessons/:slug/edit" do
+    get "lessons/:id/edit" do
         if logged_in?
-            @lesson = Lesson.find_by_slug(params[:slug])
+            @lesson = Lesson.find_by(id: params[:id])
             if @lesson
                 if @lesson.teacher = current_user
                     erb :"lessons/edit_lesson"
                 else
-                    redirect "/lessons/#{@lesson.slug}"
+                    redirect "/lessons/#{@lesson.id}"
                 end
             else
                 redirect "/lessons"
@@ -50,18 +70,31 @@ class LessonController < ApplicationController
         end
     end
 
-    patch "/lessons/:slug" do
-        lesson = current_user.lessons.find_by_slug(params[:slug])
-        if params #content of the edits are valid
-            #update each part of the lesson
+    patch "/lessons/:id" do
+        lesson = current_user.lessons.find_by(id: params[:id])
+        #again, checking to see whether params will work instead
+        binding.pry
+        arr = []
+        title = params[:title]
+        arr << title
+        learning_obj = params[:learning_obj]
+        arr << learning_obj
+        length = params[:length]
+        arr << length
+        summary = params[:summary]
+        arr << summary
+        assessment = parrams[:assessment]
+        arr << assessment
+        if arr.include?("")
+            redirect "/lessons/#{lesson.id}"
         else
-            redirect "/lessons/#{lesson.slug}"
+            lesson.update(title: title, learning_obj: learning_obj, length: length, summary: summary, assessment: assessment)
         end
     end
 
-    delete "/lessons/:slug/delete" do
-        if current_user.lessons.find_by_slug(params[:slug])
-            lesson = current_user.lessons.find_by_slug(params[:slug])
+    delete "/lessons/:id/delete" do
+        if current_user.lessons.find_by(id: params[:id])
+            lesson = current_user.lessons.find_by(id: params[:id])
             lesson.delete
             redirect "/lessons"
         else
