@@ -1,0 +1,7 @@
+<h1><%= @teacher.name %></h1>
+    <h2><%= @teacher.subject.name %></h2>
+    <% @teacher.lessons.each do |lesson|%>
+        <h3><%= lesson.name %></h3>
+            <p><%= lesson.learning_obj %></p>
+            <p><a href="/lessons/<%= lesson.id %>">Link</a></p>
+    <% end%>

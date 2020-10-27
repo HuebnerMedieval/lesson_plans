@@ -1,10 +1,11 @@
+require 'pry'
 class TeacherController < ApplicationController
 
-    get "/signup" do
-        #need to create signup view
+    get "/teachers/new" do
         if logged_in?
             redirect "/teachers/#{current_user.slug}"
         else
+            @subjects = Subject.all
             erb :"teachers/signup"
         end
     end
@@ -15,14 +16,15 @@ class TeacherController < ApplicationController
         arr << name
         password = params[:password]
         arr << password
-        subject = params[:subject]
+
+        subject = Subject.find_by(id: params[:teacher][0][:subject_id])
         arr << subject
         if Teacher.find_by(name: name)
             redirect "/login"
         elsif arr.include?("")
             redirect "/signup"
         else
-            teacher = Teacher.new(name: name, password: password)
+            teacher = Teacher.new(name: name, password: password, subject: subject)
             if teacher.authenticate(password)
                 teacher.save
                 session[:user_id] = teacher.id
@@ -52,6 +54,7 @@ class TeacherController < ApplicationController
 
     get "/teachers" do
         if logged_in?
+            @subjects = Subject.all
             erb :"teachers/teachers"
         else
             redirect "/"

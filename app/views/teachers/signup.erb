@@ -1,5 +1,12 @@
 <h1>Fill out the form below to create an account!</h1>
 
 <form action="/teachers" method="post">
-    
+    <p>Name: <input type="text" name="name" id="name"></p>
+    <p>Password: <input type="password" name="password" id="password"></p>
+    <p>Select a Subject: 
+        <% @subjects.each do |subject| %>
+            <input type="checkbox" name="teacher[][subject_id]" id="<%= subject.id %>" value="<%= subject.id %>"><%= subject.name %>
+        <% end %>
+    </p>
+    <p><input type="submit" value="submit"></p>
 </form>
