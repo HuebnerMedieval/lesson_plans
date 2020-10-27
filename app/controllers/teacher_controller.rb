@@ -9,7 +9,7 @@ class TeacherController < ApplicationController
         end
     end
 
-    post "/teachers/new" do
+    post "/teachers" do
         arr = []
         name = params[:name]
         arr << name

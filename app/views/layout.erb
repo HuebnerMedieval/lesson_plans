@@ -17,7 +17,12 @@
     <div class="wrapper">
       <h1>Welcome To Your Lesson Planner!</h1>
       <% if logged_in? %>
-        <p><a href="/">Home Page </a> or <a href="/logout">Log Out</a></p>
+        <a href="/teachers/<%= current_user.slug %>">| My Page</a>
+        <a href="/teachers">| All Teachers</a>
+        <a href="/lessons/new">| Create A New Lesson</a>
+        <a href="/lessons">| View all Lessons</a>
+        <a href="/subjects">| View All Subjects</a>
+        <a href="/logout">| Log Out |</a>
       <% else %>
         <p><a href="/teachers/new">Sign Up</a> or <a href="/login">Log In</a></p>
       <% end%>
