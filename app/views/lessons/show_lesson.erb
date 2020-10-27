@@ -1,0 +1,17 @@
+<h1><%= @lesson.title %></h1>
+    <h2>Owner: <a href="/teachers/<%= @lesson.teacher.slug %>"><%= @lesson.teacher.name %></a></h2>
+    <h2>Subject: <a href="/subjects/<%= @lesson.subject.id %>"><%= @lesson.subject.name%></a></h2>
+    <h2>Learning Objective: <%= @lesson.learning_obj %></h2>
+        <p><%= @lesson.summary %></p>
+        <p><%= @lesson.length %></p>
+        <p><%= @lesson.assessment %></p>
+        <% if current_user = @lesson.teacher%>
+            <form action="/lessons/<%= @lesson.id %>/edit" method="get">
+                <input type="submit" value="Edit Lesson">
+            </form>
+
+            <form action="/lessons/<%= @lesson.id %>/delete" method="post">
+                <input id="hiddent" type="hidden" name="_method" value="delete">
+                <input type="submit" value="Delete Lesson">
+            </form>
+        <% end%>

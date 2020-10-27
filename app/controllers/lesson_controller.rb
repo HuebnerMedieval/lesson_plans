@@ -33,7 +33,7 @@ class LessonController < ApplicationController
 
     get "/lessons" do
         if logged_in?
-            @lessons = Lesson.all
+            @lessons = Lesson.all.sort_by{|lesson| lesson.subject.name}
             erb :"lessons/lessons"
         else
             redirect "/"
