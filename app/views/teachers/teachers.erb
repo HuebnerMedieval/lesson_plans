@@ -1,10 +1,14 @@
-<h1>All Teachers</h1>
+<!DOCTYPE html>
+    <body>
+        <h1>All Teachers</h1>
 
-<% @subjects.each do |subject| %>
-    <% if !subject.teachers.empty?%>
-        <h2><%= subject.name %></h2>
-        <% subject.teachers.each do |teacher|%>
-            <p><%= teacher.name %>: <a href="/teachers/<%= teacher.slug %>">Lessons</a></p>
-        <% end%>
-    <% end%>
-<% end %>
+        <% @subjects.each do |subject| %>
+            <% if !subject.teachers.empty?%>
+                <h2><%= subject.name %></h2>
+                <% subject.teachers.each do |teacher|%>
+                    <p><%= teacher.name %>: <a href="/teachers/<%= teacher.slug %>">Lessons</a></p>
+                <% end%>
+            <% end%>
+        <% end %>
+    </body>
+</html>

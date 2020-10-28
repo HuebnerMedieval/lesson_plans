@@ -1,13 +1,17 @@
-<h1>Make your changes below</h1>
-    <h2>Every field must be filled in! </h2>
+<!DOCTYPE html>
+    <body>
+        <h1>Make your changes below</h1>
+            <h2>Every field must be filled in! </h2>
 
-    <form action="/lessons/<%= @lesson.id %>" method="post">
-        <input id="hiddent" type="hidden" name="_method" value="patch">
-        <p>Lesson Title: <input type="text" name="title" id="title" value="<%= @lesson.title %>"></p>
-        <p>Learning Objective: <input type="text" name="learning_obj" id="learning_obj" value="<%= @lesson.learning_obj %>"></p>
-        <p>Length of Lesson: <input type="text" name="length" id="length" value="<%= @lesson.length %>"></p>
-        <p>Summary of Lesson: </p>
-        <p><textarea name="summary" id="summary" cols="60" rows="10" ><%= @lesson.summary %></textarea></p>
-        <p>Assessment: <input type="text" name="assessment" id="assessment" value="<%= @lesson.assessment %>"></p>
-        <input type="submit" value="submit" id="submit">
-    </form>
+            <form action="/lessons/<%= @lesson.id %>" method="post">
+                <input id="hiddent" type="hidden" name="_method" value="patch">
+                <p>Lesson Title: <input type="text" name="title" id="title" value="<%= @lesson.title %>"></p>
+                <p>Learning Objective: <input type="text" name="learning_obj" id="learning_obj" value="<%= @lesson.learning_obj %>"></p>
+                <p>Length of Lesson: <input type="text" name="length" id="length" value="<%= @lesson.length %>"></p>
+                <p>Summary of Lesson: </p>
+                <p><textarea name="summary" id="summary" cols="60" rows="10" ><%= @lesson.summary %></textarea></p>
+                <p>Assessment: <input type="text" name="assessment" id="assessment" value="<%= @lesson.assessment %>"></p>
+                <input type="submit" value="submit" id="submit">
+            </form>
+    </body>
+</html>

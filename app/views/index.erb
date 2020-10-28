@@ -1,16 +1,18 @@
-<div class="container">
+<!DOCTYPE html>
+    <body>  
+        <div class="home">
 
-    <% if logged_in? %>
-            <h2>Select one of the links above to begin!</h2>
-    <% else %>
-            <h2>Please Sign Up or Log In to use this website!</h2>
-            <h3>Once Logged In, you can:</h3>
-                <ul>
-                    <li>- Create new lessons</li>
-                    <li>- View, edit, and delete existing lessons</li>
-                    <li>- View lessons created by other teachers</li>
-                </ul>
-
-    <% end%>
-
-</div>
+            <% if logged_in? %>
+                    <h2>Select one of the links above to begin!</h2>
+            <% else %>
+                    <h2>Please Sign Up or Log In to use this website!</h2>
+                    <h3>Once Logged In, you can:</h3>
+                        <ul>
+                            <li>- Create new lessons</li>
+                            <li>- View, edit, and delete existing lessons</li>
+                            <li>- View lessons created by other teachers</li>
+                        </ul>
+            <% end%>
+        </div>
+    </body>
+</html>
