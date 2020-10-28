@@ -11,13 +11,13 @@ class TeacherController < ApplicationController
     end
 
     post "/teachers" do
+        # checking params to see if they will work
         arr = []
         name = params[:name]
         arr << name
         password = params[:password]
         arr << password
-
-        subject = Subject.find_by(id: params[:teacher][0][:subject_id])
+        subject = Subject.find_by(id: params[:subject])
         arr << subject
         if Teacher.find_by(name: name)
             redirect "/login"
@@ -44,11 +44,12 @@ class TeacherController < ApplicationController
 
     post "/login" do
         teacher = Teacher.find_by(name: params[:name])
-        if teacher && Teacher.authenticate(params[:password])
+        
+        if teacher && teacher.authenticate(params[:password])
             session[:user_id] = teacher.id
             redirect "/teachers/#{teacher.slug}"
         else
-            redirect "/signup"
+            redirect "/teachers/new"
         end
     end
 
@@ -68,6 +69,11 @@ class TeacherController < ApplicationController
         else
             redirect "/"
         end
+    end
+
+    get "/logout" do
+        session.clear
+        redirect "/"
     end
 
 end

@@ -13,7 +13,7 @@ class SubjectController < ApplicationController
         end
     end
 
-    get "subjects/:id" do
+    get "/subjects/:id" do
         if logged_in?
             @subject = Subject.find_by(id: params[:id])
             erb :"subjects/show"

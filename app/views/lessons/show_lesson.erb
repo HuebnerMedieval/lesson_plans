@@ -2,10 +2,10 @@
     <h2>Owner: <a href="/teachers/<%= @lesson.teacher.slug %>"><%= @lesson.teacher.name %></a></h2>
     <h2>Subject: <a href="/subjects/<%= @lesson.subject.id %>"><%= @lesson.subject.name%></a></h2>
     <h2>Learning Objective: <%= @lesson.learning_obj %></h2>
-        <p><%= @lesson.summary %></p>
-        <p><%= @lesson.length %></p>
-        <p><%= @lesson.assessment %></p>
-        <% if current_user = @lesson.teacher%>
+        <p>Summary: <%= @lesson.summary %></p>
+        <p>Length: <%= @lesson.length %></p>
+        <p>Assessment: <%= @lesson.assessment %></p>
+        <% if current_user == @lesson.teacher%>
             <form action="/lessons/<%= @lesson.id %>/edit" method="get">
                 <input type="submit" value="Edit Lesson">
             </form>

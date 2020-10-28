@@ -1,7 +1,6 @@
 <h1>Lessons</h1>
     <% @lessons.each do |lesson|%>
-        <h2><%= lesson.title %></h2>
-            <h3><%= lesson.teacher.name %></h3>
+        <h2><%= lesson.title %> by <%= lesson.teacher.name %></h2>
             <h3><%= lesson.subject.name %></h3>
                 <p><%= lesson.learning_obj %></p>
                 <p><a href="/lessons/<%= lesson.id %>">Link</a></p>

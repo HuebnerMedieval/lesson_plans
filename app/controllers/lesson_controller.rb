@@ -10,23 +10,10 @@ class LessonController < ApplicationController
     end
 
     post "/lessons" do
-        #checking to see whether params works instead of array
-        binding.pry
-        arr = []
-        title = params[:title]
-        arr << title
-        learning_obj = params[:learning_obj]
-        arr << learning_obj
-        length = params[:length]
-        arr << length
-        summary = params[:summary]
-        arr << summary
-        assessment = parrams[:assessment]
-        arr << assessment
-        if arr.include?("")
+        if params.has_value?("")
             redirect "/lessons/new"
         else
-            lesson = current_user.lessons.create(title: title, learning_obj: learning_obj, length: length, summary: summary, assessment: assessment)
+            lesson = current_user.lessons.create(params)
             redirect "lessons/#{lesson.id}"
         end
     end
@@ -53,11 +40,12 @@ class LessonController < ApplicationController
         end
     end
 
-    get "lessons/:id/edit" do
+    get "/lessons/:id/edit" do
         if logged_in?
             @lesson = Lesson.find_by(id: params[:id])
+            # binding.pry
             if @lesson
-                if @lesson.teacher = current_user
+                if @lesson.teacher == current_user
                     erb :"lessons/edit_lesson"
                 else
                     redirect "/lessons/#{@lesson.id}"
@@ -73,7 +61,6 @@ class LessonController < ApplicationController
     patch "/lessons/:id" do
         lesson = current_user.lessons.find_by(id: params[:id])
         #again, checking to see whether params will work instead
-        binding.pry
         arr = []
         title = params[:title]
         arr << title
@@ -83,12 +70,13 @@ class LessonController < ApplicationController
         arr << length
         summary = params[:summary]
         arr << summary
-        assessment = parrams[:assessment]
+        assessment = params[:assessment]
         arr << assessment
         if arr.include?("")
             redirect "/lessons/#{lesson.id}"
         else
             lesson.update(title: title, learning_obj: learning_obj, length: length, summary: summary, assessment: assessment)
+            redirect "/lessons/#{lesson.id}"
         end
     end
 
@@ -96,7 +84,7 @@ class LessonController < ApplicationController
         if current_user.lessons.find_by(id: params[:id])
             lesson = current_user.lessons.find_by(id: params[:id])
             lesson.delete
-            redirect "/lessons"
+            redirect "/teacher/#{current_user.slug}"
         else
             redirect "/lessons"
         end
