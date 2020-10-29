@@ -16,6 +16,7 @@ class TeacherController < ApplicationController
         arr << name
         password = params[:password]
         arr << password
+        binding.pry
         subject = Subject.find_by(id: params[:subject])
         arr << subject
         if Teacher.find_by(name: name)
