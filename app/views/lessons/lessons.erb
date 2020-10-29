@@ -4,7 +4,7 @@
             <% @lessons.each do |lesson|%>
                 <h2><%= lesson.title %> by <%= lesson.teacher.name %></h2>
                     <h3>Title: <%= lesson.subject.name %></h3>
-                        <p>Learning Objective<%= lesson.learning_obj %></p>
+                        <p>Learning Objective: <%= lesson.learning_obj %></p>
                         <p><a href="/lessons/<%= lesson.id %>">Link</a></p>
             <% end%>
     </body>
