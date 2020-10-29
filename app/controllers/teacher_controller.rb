@@ -11,7 +11,6 @@ class TeacherController < ApplicationController
     end
 
     post "/teachers" do
-        # checking params to see if they will work
         arr = []
         name = params[:name]
         arr << name

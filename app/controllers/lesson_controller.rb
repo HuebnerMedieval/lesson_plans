@@ -43,7 +43,6 @@ class LessonController < ApplicationController
     get "/lessons/:id/edit" do
         if logged_in?
             @lesson = Lesson.find_by(id: params[:id])
-            # binding.pry
             if @lesson
                 if @lesson.teacher == current_user
                     erb :"lessons/edit_lesson"
@@ -60,7 +59,6 @@ class LessonController < ApplicationController
 
     patch "/lessons/:id" do
         lesson = current_user.lessons.find_by(id: params[:id])
-        #again, checking to see whether params will work instead
         arr = []
         title = params[:title]
         arr << title
