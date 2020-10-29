@@ -82,7 +82,7 @@ class LessonController < ApplicationController
         if current_user.lessons.find_by(id: params[:id])
             lesson = current_user.lessons.find_by(id: params[:id])
             lesson.delete
-            redirect "/teacher/#{current_user.slug}"
+            redirect "/teachers/#{current_user.slug}"
         else
             redirect "/lessons"
         end
