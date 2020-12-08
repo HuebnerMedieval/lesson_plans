@@ -16,13 +16,12 @@ class TeacherController < ApplicationController
         arr << name
         password = params[:password]
         arr << password
-        binding.pry
         subject = Subject.find_by(id: params[:subject])
         arr << subject
         if Teacher.find_by(name: name)
             redirect "/login"
         elsif arr.include?("")
-            redirect "/signup"
+            redirect "/teachers/new"
         else
             teacher = Teacher.new(name: name, password: password, subject: subject)
             if teacher.authenticate(password)

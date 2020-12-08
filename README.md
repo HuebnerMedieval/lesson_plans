@@ -9,7 +9,7 @@ No extra gems are required to use this application.
 ### Installation
 To install this application, please download a copy at:
 
-        https://github.com/HuebnerMedieval/spellbook-5e-cli
+        https://github.com/HuebnerMedieval/lesson_plans
 
 Once installed, run bundle install.
 
